@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Search in Array</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f4f4f4;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 350px;
+}
+
+button {
+    padding: 5px 10px;
+    margin: 5px;
+    background: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Search in Array</h2>
+
+    <input type="text" id="searchInput" placeholder="Enter value">
+    <button onclick="search()">Search</button>
+
+    <p id="arrayDisplay"></p>
+    <p id="result"></p>
+</div>
+
+<script>
+let data = ["Audi", "BMW", "Tata", "Mahindra", "Honda"];
+
+function displayArray(highlightIndex = -1) {
+    let output = "";
+
+    data.forEach((item, index) => {
+        if (index === highlightIndex) {
+            output += `<span class="highlight">${item}</span> `;
+        } else {
+            output += item + " ";
+        }
+    });
+
+    document.getElementById("arrayDisplay").innerHTML = output;
+}
+
+// initial display
+displayArray();
+
+function search() {
+    let value = document.getElementById("searchInput").value.toLowerCase();
+    let index = data.findIndex(item => item.toLowerCase() === value);
+
+    if (index !== -1) {
+        displayArray(index);
+        document.getElementById("result").innerText = "Found!";
+    } else {
+        displayArray();
+        document.getElementById("result").innerText = "No matches found";
+    }
+}
+</script>
+
+</body>
+</html>
