@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sort Names</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f4f4f4;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+}
+
+input {
+    padding: 6px;
+}
+
+button {
+    padding: 5px 10px;
+    margin: 5px;
+    background: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+ul {
+    margin-top: 15px;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+    padding: 8px;
+}
+
+/* alternating colors */
+li:nth-child(odd) {
+    background-color: #eee;
+}
+
+li:nth-child(even) {
+    background-color: #ddd;
+}
+
+/* hover effect */
+li:hover {
+    background-color: #bbb;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Sort Names Alphabetically</h2>
+
+    <input type="text" id="nameInput" placeholder="Enter a name">
+    <button onclick="addName()">Add Name</button>
+    <button onclick="sortNames()">Sort</button>
+    <button onclick="resetList()">Reset</button>
+
+    <ul id="nameList"></ul>
+</div>
+
+<script>
+let names = [];
+
+function addName() {
+    let input = document.getElementById("nameInput");
+    let name = input.value.trim();
+
+    if (name === "") return;
+
+    names.push(name);
+    input.value = "";
+    displayNames();
+}
+
+function displayNames() {
+    let list = document.getElementById("nameList");
+    list.innerHTML = "";
+
+    names.forEach(name => {
+        let li = document.createElement("li");
+        li.innerText = name;
+        list.appendChild(li);
+    });
+}
+
+function sortNames() {
+    names.sort(); // alphabetical sort
+    displayNames();
+}
+
+function resetList() {
+    names = [];
+    displayNames();
+}
+</script>
+
+</body>
+</html>
