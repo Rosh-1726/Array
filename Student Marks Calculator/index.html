@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Marks Calculator</title>
+
+<style>
+body {
+    font-family: Arial;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 350px;
+}
+
+button {
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Student Marks Calculator</h2>
+
+    <input type="number" id="markInput" placeholder="Enter mark">
+    <button onclick="addMark()">Add Mark</button>
+    <button onclick="calculate()">Calculate</button>
+    <button onclick="reset()">Reset</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+let marks = [];
+
+function addMark() {
+    let input = document.getElementById("markInput");
+    let value = parseInt(input.value);
+
+    if (isNaN(value)) return;
+
+    marks.push(value);
+    input.value = "";
+}
+
+function calculate() {
+    if (marks.length === 0) return;
+
+    let total = marks.reduce((a, b) => a + b, 0);
+    let avg = total / marks.length;
+    let max = Math.max(...marks);
+    let min = Math.min(...marks);
+
+    document.getElementById("result").innerHTML = `
+        Total Marks: ${total} <br>
+        Average: ${avg.toFixed(2)} <br>
+        Highest: ${max} <br>
+        Lowest: ${min}
+    `;
+}
+
+function reset() {
+    marks = [];
+    document.getElementById("result").innerHTML = "";
+}
+</script>
+
+</body>
+</html>
